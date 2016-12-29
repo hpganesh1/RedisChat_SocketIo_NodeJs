@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Chat using Node.js, socket.io, redis</title>
+    <style>
+      body { font: 25px Helvetica, Arial; }
+      form { font-size: 20px; font-weight:bold;background: #000; padding: 3px; bottom: 0; width: 50%; margin:auto; margin-top : 100px; border-radius:8px;display:block }
+      form input { border: 0; padding: 10px;margin:auto;display:block; font-weight:bold;font-size: 16px;border-radius:5px;  }
+      form button { width: 100px; background: rgb(234, 123, 49); border: none; padding: 10px;font-weight:bold; margin-left:auto; margin-right:auto;;display:block; border-radius:8px;cursor:pointer; cursor: hand;}
+      #NameLabel {width: 240px;color:#3ab266;margin:auto;display:block }
+    </style>
+  </head>
+
+  <body>
+	    <form action="">
+		<br>
+		<label id="NameLabel">Please Enter Your Name</label>
+		<br>
+		<input id="name" autocomplete="off" />
+		<br>
+		<button id="startChat">Start Chat</button>
+		<br>
+	    </form>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script >
+  $('form').submit(function(){
+	if($('#name').val() == '')
+		alert("please enter a name!");
+	else 
+	{
+		window.location.href = "http://localhost:3000/?name="+$('#name').val();		
+		return false;
+	}
+  });
+
+
+</script>
+
+  </body>
+</html>
