@@ -17,11 +17,11 @@
   </head>
 
   <body>
-
+<button id="EndChat">End</button>
     <ul id="messages"></ul>
     <form action="">
         <label id="actionInfo"> </label>
-        <button id="EndChat">End</button>
+
 	<br>
   <br>
 	<input id="m" autocomplete="off" /><button>Send</button>
@@ -33,6 +33,7 @@
   var socket = io();
 
   $('form').submit(function(){
+    if($('#m').val() != '')
     socket.emit('chat message', $('#m').val());
     $('#m').val('');
     return false;
@@ -54,11 +55,15 @@ $('#m').on('input',function(){
   });
 
   $('#EndChat').on('click',function(){
-  	socket.emit('end chat');
+    $('#m').attr("disabled","disabled");
+    $('#EndChat').attr("disabled","disabled");
+    socket.emit('end chat');
   });
 
   socket.on('end chat', function(msg){
     $('#actionInfo').text('This chat has ended');
+    $('#m').attr("disabled","disabled");
+    $('#EndChat').attr("disabled","disabled");
   });
 
 

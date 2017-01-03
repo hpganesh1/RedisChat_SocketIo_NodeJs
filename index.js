@@ -3,7 +3,7 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var redis= require('redis');
-var client= redis.createClient();
+var client= redis.createClient(['127.0.0.1','26381'],['127.0.0.1','26380']);
 var name="Agent-Patron";
 var userName = '';
 
@@ -47,7 +47,7 @@ io.on('connection', function(socket){
 
 			//persist the message to redis
 			client.rpush([name,uName+" : "+msg], function(err, reply){
-			 console.log("Chat message persisted. Total chat messages : "reply);//returns the count of items in the list
+			 console.log("message:"+msg+". Total chat messages : "+reply);//returns the count of items in the list
 				});
 			io.emit('chat message', uName+" : "+msg);
 			uName = '';
